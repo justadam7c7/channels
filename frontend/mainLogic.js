@@ -147,16 +147,6 @@ const sortItems = () => {
     }
 };
 
-const arrayOfObjectsUnsorted = JSON.parse(httpGet('http://localhost:3000/api/data/unsorted'));
-displayItems(arrayOfObjectsUnsorted);
-
-const filterInput = document.querySelector('.filter__input');
-filterInput.addEventListener('keyup', searchEngine);
-
-const sortButton = document.querySelector('.change-sort');
-sortButton.addEventListener('click', sortItems);
-
-const clearBtn = document.querySelector(".button");
 const clearEverything = () => {
     const buttonsArr = Array.from(document.querySelectorAll('.choice--radio'));
     buttonsArr.forEach(el => {
@@ -167,6 +157,17 @@ const clearEverything = () => {
     existingWrapper.remove();
     displayItems(arrayOfObjectsUnsorted);
 };
+
+const arrayOfObjectsUnsorted = JSON.parse(httpGet('http://localhost:3000/api/data/unsorted'));
+displayItems(arrayOfObjectsUnsorted);
+
+const filterInput = document.querySelector('.filter__input');
+filterInput.addEventListener('keyup', searchEngine);
+
+const sortButton = document.querySelector('.change-sort');
+sortButton.addEventListener('click', sortItems);
+
+const clearBtn = document.querySelector(".button");
 clearBtn.addEventListener('click', clearEverything);
 
 
