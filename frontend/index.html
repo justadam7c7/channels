@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html data-pattern="bright">
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript Youtube Channels</title>
+    <link rel="stylesheet" type="text/css" href="vendor.css">
+</head>
+<body class="wrapper dark || bright">
+    <header class="wrapper__header dark">
+        <h1 class="header">
+            <span class="header__js-logo">
+                <img src="https://yt3.ggpht.com/a-/AN66SAxWC2To0-1xz2-X3HNC6WFdP8zPKKqqHk_8ug=s88-mo-c-c0xffffffff-rj-k-no"
+                    alt="logo-JavaScript" title="picture-logo Javascript">
+            </span> Channels
+        </h1>
+    </header>
+    <main class="wrapper__main js-content dark ">
+    </main>
+    <div class="wrapper__filter dark ">
+        <div class="filter">
+            <input class="filter__input" type="text" placeholder="filter channels...">
+        </div>
+    </div>
+    <aside class="wrapper__aside dark ">
+        <div class="sort">
+            <h3 class="sort__header">Sort channels by:</h3>
+            <ul class="sort__options">
+                <li>
+                    <input class="choice choice--radio" name="sort" type="radio" id="sort-title">
+                    <label class="choice__label" for="sort-title">title</label>
+                </li>
+                <li>
+                    <input class="choice choice--radio" name="sort" type="radio" id="sort-subscribers">
+                    <label class="choice__label" for="sort-subscribers">subscribers</label>
+                </li>
+                <li>
+                    <input class="choice choice--radio" name="sort" type="radio" id="sort-videos">
+                    <label class="choice__label" for="sort-videos">videos</label>
+                </li>
+                <li>
+                    <input class="choice choice--radio" name="sort" type="radio" id="sort-views">
+                    <label class="choice__label" for="sort-views">views</label>
+                </li>
+            </ul>
+            <button class="button">Clear</button>
+            <button class="change-sort">Sort</button>
+            <button class="dark-theme bright-theme">Change color</button>
+        </div>
+    </aside>
+    <script src="mainLogic.js"></script>
+</body>
+
+</html>
