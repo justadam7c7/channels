@@ -1,5 +1,5 @@
 function httpGet(theUrl) {
-    var xmlHttp = new XMLHttpRequest();
+    let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
     return xmlHttp.responseText;
@@ -34,7 +34,7 @@ function displayItems(arrayOfObjects) {
             <li class="informations-paragraph">Views:</li>
             <li class="informations-numbers" id="informations-view">${viewCount}</li>
         </ul>
-    </div>`
+    </div>`;
         newWrapper.appendChild(newChannel);
     });
 }
@@ -71,12 +71,10 @@ function checkWhatIsMarkedAsSearchSortItem() {
         return undefined;
 }
 
-function removePolishSigns(text) {
-    return text.replace(/ą/g, "a").replace(/ć/g, "c")
-        .replace(/ę/g, "e").replace(/ł/g, "l")
-        .replace(/ń/g, "n").replace(/ó/g, "o")
-        .replace(/ś/g, "s").replace(/ż|ź/g, "z");
-}
+const removePolishSigns = text => text.replace(/ą/g, "a").replace(/ć/g, "c")
+    .replace(/ę/g, "e").replace(/ł/g, "l")
+    .replace(/ń/g, "n").replace(/ó/g, "o")
+    .replace(/ś/g, "s").replace(/ż|ź/g, "z");
 
 const searchEngine = e => {
     const boxes = document.querySelectorAll('.box');
@@ -85,15 +83,15 @@ const searchEngine = e => {
     const whatToSearchFor = checkWhatIsMarkedAsSearchSortItem();
     boxes.forEach(el => {
         const contentString = el.querySelector(whatToSearchFor);
-        if (contentString.innerHTML.toLowerCase().indexOf(textWithoutPolishSigns) !== -1) {
-            el.style.display = 'block';
-        } else {
+        if (contentString.innerHTML.toLowerCase().indexOf(textWithoutPolishSigns) === -1) {
             el.style.display = 'none';
+        } else {
+            el.style.display = 'block';
         }
     });
 };
 
-const sortItems = e => {
+const sortItems = () => {
     const sortButton = document.querySelector('.change-sort');
     sortButton.classList.toggle('asc');
     const sortedAsc = !!document.querySelector('.asc');
@@ -158,19 +156,17 @@ filterInput.addEventListener('keyup', searchEngine);
 const sortButton = document.querySelector('.change-sort');
 sortButton.addEventListener('click', sortItems);
 
-
 const clearBtn = document.querySelector(".button");
-const radioBtn = document.querySelector(".choice");
 const clearEverything = () => {
     const buttonsArr = Array.from(document.querySelectorAll('.choice--radio'));
     buttonsArr.forEach(el => {
         el.checked = false;
-    })
+    });
     filterInput.value = '';
     const existingWrapper = document.querySelector('section');
     existingWrapper.remove();
     displayItems(arrayOfObjectsUnsorted);
-}
+};
 clearBtn.addEventListener('click', clearEverything);
 
 
