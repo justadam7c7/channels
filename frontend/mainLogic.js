@@ -19,7 +19,7 @@ function displayItems(arrayOfObjects) {
         const newChannel = document.createElement('article');
         newChannel.classList.add('box');
         newChannel.innerHTML =
-            `<a href="${e.customUrl}"><img class="box__image" src="${imageJson.url}" style="width:${imageJson.width}px; height:${imageJson.height}px;" alt="logo page" title="picture page"></a> 
+            `<a href="${e.customUrl}" target="_blank"><img class="box__image" src="${imageJson.url}" style="width:${imageJson.width}px; height:${imageJson.height}px;" alt="logo page" title="picture page"></a> 
     <h2 class="box__heading" id="heading-title">${e.title}</h2>
     <div class="box__items">
         <ul class="items__informations">
