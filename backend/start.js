@@ -8,7 +8,7 @@ const Router = require('koa-router');
 const getPort = require('get-port');
 
 function prepareArray(jsonArrayUnsorted) {
-    jsonArrayUnsorted.forEach( el => {
+    jsonArrayUnsorted.forEach(el => {
         const viewCount = el.statistics.viewCount.replace(/[ ,.]/g, "");
         const subscriberCount = el.statistics.subscriberCount.replace(/[ ,.]/g, "");
         const videoCount = el.statistics.videoCount.replace(/[ ,.]/g, "");
@@ -18,104 +18,124 @@ function prepareArray(jsonArrayUnsorted) {
     });
 }
 
+const sortLetterAscending = function (a, b) {
+    return b.title.toLowerCase() < a.title.toLowerCase() ? 1
+        : b.title.toLowerCase() > a.title.toLowerCase() ? -1
+            : 0;
+};
+
 function sortByTitleAsc(jsonArrayUnsorted) {
-    let jsonArraySortedByTitleAsc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return jsonArraySortedByTitleAsc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return b.title.toLowerCase() < a.title.toLowerCase() ? 1
-            : b.title.toLowerCase() > a.title.toLowerCase() ? -1
-                : 0;
-    });
+    const jsonArraySortedByTitleAsc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortLetterAscending)
+    );
+    return jsonArraySortedByTitleAsc;
 }
+
+
+const sortLetterDescending = function (a, b) {
+    return b.title.toLowerCase() > a.title.toLowerCase() ? 1
+        : b.title.toLowerCase() < a.title.toLowerCase() ? -1
+            : 0;
+};
 
 function sortByTitleDesc(jsonArrayUnsorted) {
-    let jsonArraySortedByTitleAsc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return jsonArraySortedByTitleAsc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return b.title.toLowerCase() > a.title.toLowerCase() ? 1
-            : b.title.toLowerCase() < a.title.toLowerCase() ? -1
-                : 0;
-    });
+    const jsonArraySortedByTitleDesc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortLetterDescending)
+    );
+    return jsonArraySortedByTitleDesc;
 }
+
+const sortBySubscribersAscending = function (a, b) {
+    return parseInt(b.statistics.subscriberCount) < parseInt(a.statistics.subscriberCount) ? 1
+        : parseInt(b.statistics.subscriberCount) > parseInt(a.statistics.subscriberCount) ? -1
+            : 0
+};
 
 function sortBySubscribersAsc(jsonArrayUnsorted) {
-    let sortedBySubscribersAsc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedBySubscribersAsc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.subscriberCount) < parseInt(a.statistics.subscriberCount) ? 1
-            : parseInt(b.statistics.subscriberCount) > parseInt(a.statistics.subscriberCount) ? -1
-                : 0;
-    });
+    const sortedBySubscribersAsc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortBySubscribersAscending)
+    );
+    return sortedBySubscribersAsc;
 }
+
+const sortBySubscribersDescending = function (a, b) {
+    return parseInt(b.statistics.subscriberCount) > parseInt(a.statistics.subscriberCount) ? 1
+        : parseInt(b.statistics.subscriberCount) < parseInt(a.statistics.subscriberCount) ? -1
+            : 0;
+};
 
 function sortBySubscribersDesc(jsonArrayUnsorted) {
-    let sortedBySubscribersDesc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedBySubscribersDesc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.subscriberCount) > parseInt(a.statistics.subscriberCount) ? 1
-            : parseInt(b.statistics.subscriberCount) < parseInt(a.statistics.subscriberCount) ? -1
-                : 0;
-    });
+    const sortedBySubscribersDesc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortBySubscribersDescending));
+    return sortedBySubscribersDesc;
 }
+
+const sortByVideosAscending = function (a, b) {
+    return parseInt(b.statistics.videoCount) < parseInt(a.statistics.videoCount) ? 1
+        : parseInt(b.statistics.videoCount) > parseInt(a.statistics.videoCount) ? -1
+            : 0;
+};
 
 function sortByVideosAsc(jsonArrayUnsorted) {
-    let sortedBySubscribersAsc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedBySubscribersAsc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.videoCount) < parseInt(a.statistics.videoCount) ? 1
-            : parseInt(b.statistics.videoCount) > parseInt(a.statistics.videoCount) ? -1
-                : 0;
-    });
+    const sortedByVideosAsc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortByVideosAscending));
+    return sortedByVideosAsc;
 }
+
+const sortByVideosDescending = function (a, b) {
+    return parseInt(b.statistics.videoCount) > parseInt(a.statistics.videoCount) ? 1
+        : parseInt(b.statistics.videoCount) < parseInt(a.statistics.videoCount) ? -1
+            : 0;
+};
 
 function sortByVideosDesc(jsonArrayUnsorted) {
-    let sortedBySubscribersDesc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedBySubscribersDesc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.videoCount) > parseInt(a.statistics.videoCount) ? 1
-            : parseInt(b.statistics.videoCount) < parseInt(a.statistics.videoCount) ? -1
-                : 0;
-    });
+    const sortedByVideosDesc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortByVideosDescending));
+    return sortedByVideosDesc;
 }
+
+const sortByViewsAscending = function (a, b) {
+    return parseInt(b.statistics.viewCount) < parseInt(a.statistics.viewCount) ? 1
+        : parseInt(b.statistics.viewCount) > parseInt(a.statistics.viewCount) ? -1
+            : 0;
+};
 
 function sortByViewsAsc(jsonArrayUnsorted) {
-    let sortedByViewsAsc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedByViewsAsc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.viewCount) < parseInt(a.statistics.viewCount) ? 1
-            : parseInt(b.statistics.viewCount) > parseInt(a.statistics.viewCount) ? -1
-                : 0;
-    });
+    const sortedByViewsAsc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortByViewsAscending));
+    return sortedByViewsAsc;
 }
 
+const sortByViewsDescending = function (a, b) {
+    return parseInt(b.statistics.viewCount) > parseInt(a.statistics.viewCount) ? 1
+        : parseInt(b.statistics.viewCount) < parseInt(a.statistics.viewCount) ? -1
+            : 0;
+};
+
 function sortByViewsDesc(jsonArrayUnsorted) {
-    let sortedByViewsDesc = JSON.parse(JSON.stringify(jsonArrayUnsorted));
-    return sortedByViewsDesc.sort(/**
-     * @return {number}
-     */
-    function IHaveAName(a, b) {
-        return parseInt(b.statistics.viewCount) > parseInt(a.statistics.viewCount) ? 1
-            : parseInt(b.statistics.viewCount) < parseInt(a.statistics.viewCount) ? -1
-                : 0;
-    });
+    const sortedByViewsDesc = (
+        jsonArrayUnsorted
+            .slice()
+            .sort(sortByViewsDescending));
+    return sortedByViewsDesc;
 }
 
 async function runServer() {
-    const port = await getPort({ port: 3000 });
+    const port = await getPort({port: 3000});
 
     const app = new Koa();
     const router = new Router();
@@ -165,9 +185,9 @@ async function runServer() {
     app.use(cors());
     app.use(koaStatic(path.join(__dirname, '..', 'src')));
     app.use(router.routes())
-       .use(router.allowedMethods());
+        .use(router.allowedMethods());
     app.listen(port);
-    
+
 
     console.log(`server started at http://localhost:${port}/`);
 }
