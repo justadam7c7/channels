@@ -143,8 +143,7 @@ async function runServer() {
     const data = fs.readFileSync(path.join(__dirname, 'channels.json'), 'utf8');
     let jsonArrayUnsorted = JSON.parse(data);
     prepareArray(jsonArrayUnsorted);
-    const sortedByViewsAsc = sortByViewsAsc(jsonArrayUnsorted);
-
+   
     router.get('/api/data/unsorted', (ctx) => {
         ctx.body = jsonArrayUnsorted;
     });
